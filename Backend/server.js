@@ -7,7 +7,7 @@ import { connectDatabase } from "./src/config/database.js";
 import { registerSockets } from "./src/sockets/index.js";
 
 async function start() {
-  connectDatabase();
+  await connectDatabase();
 
   const server = http.createServer(app);
   const io = new Server(server);

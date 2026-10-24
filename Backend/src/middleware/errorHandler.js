@@ -12,7 +12,7 @@ export function apiNotFound(req, res) {
   res.status(404).json({ message: "API endpoint not found" });
 }
 
-export async function errorHandler(err, req, res, next) {
+export function errorHandler(err, req, res, next) {
   if (err.type === "entity.parse.failed") {
     return res.status(400).json({ message: "Invalid JSON body" });
   }

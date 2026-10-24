@@ -25,11 +25,6 @@ app.get("/health", (req, res) => {
 
 app.use("/api/rides", rideRouter);
 app.use("/api", apiNotFound);
-app.use("/api", errorHandler);
-
-app.use("/api", (req, res) => {
-  res.status(404).json({ message: "API endpoint not found" });
-});
 
 const distDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
