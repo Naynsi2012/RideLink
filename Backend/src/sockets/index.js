@@ -1,9 +1,10 @@
-export function registerSockets(io) {
-  io.on("connection", (socket) => {
-    console.log("Socket connected");
+import { authenticateSocket } from "./auth.js";
+import { registerRideHandlers } from "./ride.handlers.js";
 
-    socket.on("disconnect", () => {
-      console.log("Socket disconnected");
-    });
+export function registerSockets(io) {
+  io.use(authenticateSocket);
+
+  io.on("connection", (socket) => {
+    registerRideHandlers(socket);
   });
 }
