@@ -10,9 +10,8 @@ const rideRouter = express.Router();
 
 rideRouter.use(authenticateGuest);
 
-rideRouter.get("/:rideId", getRideDetails);
-
 rideRouter.post("/", createRide);
-rideRouter.post("/:rideId/join", joinRide);
+rideRouter.post("/:inviteCode/join", joinRide);
+rideRouter.get("/:rideId", getRideDetails);
 
 export default rideRouter;

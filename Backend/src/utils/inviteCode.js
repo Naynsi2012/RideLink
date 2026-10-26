@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 
 const ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const CODE_LENGTH = 8;
+const CODE_FORMAT = new RegExp(`^[${ALPHABET}]{${CODE_LENGTH}}$`);
 
 export function generateInviteCode() {
   let code = "";
@@ -14,6 +15,10 @@ export function generateInviteCode() {
 
 export function normalizeInviteCode(input) {
   return typeof input === "string" ? input.trim().toUpperCase() : "";
+}
+
+export function isValidInviteCodeFormat(input) {
+  return CODE_FORMAT.test(normalizeInviteCode(input));
 }
 
 export function hashInviteCode(code) {

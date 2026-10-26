@@ -37,3 +37,16 @@ export function valdiateCreateRide(body) {
 
   return { name, displayName };
 }
+
+export function validateJoinRide(body) {
+  const input = body ?? {};
+  const errors = {};
+
+  const displayName = readText(input.displayName, "displayName", 30, errors);
+
+  if (Object.keys(errors).length > 0) {
+    throw new ApiError(400, "Invalid join data", errors);
+  }
+
+  return { displayName };
+}

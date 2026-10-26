@@ -7,7 +7,7 @@ export const RIDE_STATUSES = [
   "completed",
   "cancelled",
 ];
-export const MEMBER_ROLES = ["leader", "ride"];
+export const MEMBER_ROLES = ["leader", "rider"];
 export const MEMBER_STATUS = ["active", "disconnected", "left"];
 export const MAX_MEMBERS = 20;
 
