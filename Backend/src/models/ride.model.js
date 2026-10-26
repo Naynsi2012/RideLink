@@ -67,7 +67,9 @@ const rideSchema = new mongoose.Schema(
     members: {
       type: [memberSchema],
       validate: {
-        validator: (members) => members.length <= MAX_MEMBERS,
+        validator: (members) =>
+          members.filter((member) => member.status !== "left").length <=
+          MAX_MEMBERS,
         message: `A ride can have at most ${MAX_MEMBERS} members`,
       },
     },

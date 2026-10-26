@@ -6,6 +6,7 @@ import {
   createRideForLeader,
   getRideForMember,
   joinRideByInviteCode,
+  leaveRideAsMember,
   toRideDto,
 } from "../services/ride.service.js";
 
@@ -35,4 +36,9 @@ export async function joinRide(req, res) {
 export async function getRideDetails(req, res) {
   const ride = await getRideForMember(req.params.rideId, req.guest.memberId);
   res.status(200).json({ ride: toRideDto(ride) });
+}
+
+export async function leaveRide(req, res) {
+  await leaveRideAsMember(req.params.rideId, req.guest.memberId);
+  res.status(204).end();
 }
