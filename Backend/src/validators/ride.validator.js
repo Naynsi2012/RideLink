@@ -1,8 +1,8 @@
 import { ApiError } from "../middleware/errorHandler.js";
 
-const DISALLOWED_CHARS = /\p{C}/u;
+export const DISALLOWED_CHARS = /\p{C}/u;
 
-function readText(value, field, max, errors) {
+export function readText(value, field, max, errors) {
   if (typeof value !== "string") {
     errors[field] = `${field} is required`;
     return undefined;
@@ -24,7 +24,7 @@ function readText(value, field, max, errors) {
   return undefined;
 }
 
-export function valdiateCreateRide(body) {
+export function validateCreateRide(body) {
   const input = body ?? {};
   const errors = {};
 
