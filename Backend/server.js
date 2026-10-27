@@ -16,6 +16,7 @@ async function start() {
     allowRequest: (req, callback) => callback(null, isSameOriginRequest(req)),
   });
 
+  app.set("io", io);
   registerSockets(io);
 
   server.listen(config.PORT, () => {

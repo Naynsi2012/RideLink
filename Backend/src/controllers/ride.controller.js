@@ -9,6 +9,10 @@ import {
   leaveRideAsMember,
   toRideDto,
 } from "../services/ride.service.js";
+import {
+  announceMemberJoined,
+  announceMemberLeft,
+} from "../sockets/broadcast.js";
 
 export async function createRide(req, res) {
   const input = valdiateCreateRide(req.body);
@@ -30,6 +34,10 @@ export async function joinRide(req, res) {
     displayName,
   });
 
+  if (joined) {
+    announceMemberJoined(req.app.get("io"), ride, req.guest.memberId);
+  }
+
   res.status(joined ? 201 : 200).json({ ride: toRideDto(ride) });
 }
 
@@ -39,6 +47,8 @@ export async function getRideDetails(req, res) {
 }
 
 export async function leaveRide(req, res) {
-  await leaveRideAsMember(req.params.rideId, req.guest.memberId);
+  const rideId = await leaveRideAsMember(req.params.rideId, req.guest.memberId);
+
+  announceMemberLeft(req.app.get("io"), rideId, req.guest.memberId);
   res.status(204).end();
 }

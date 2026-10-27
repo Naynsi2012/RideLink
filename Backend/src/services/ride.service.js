@@ -174,4 +174,5 @@ export async function leaveRideAsMember(rideId, memberId) {
   );
 
   if (!updated) throw new ApiError(404, "Ride not found");
+  return ride._id.toString();
 }
